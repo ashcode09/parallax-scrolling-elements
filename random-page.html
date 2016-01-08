@@ -1,0 +1,50 @@
+<html>
+<head></head>
+<body>
+	<div id="firstdiv" class="firstdiv" style="background: url('http://demo.bcsg.com/wp-content/themes/bcsg-demo-theme/img/blue-jagged-bg.jpg'); height:1500px;">
+		<div id="seconddiv" class="seconddiv" style="background: url('http://demo.bcsg.com/wp-content/themes/bcsg-demo-theme/img/receiptbank-key-feature-5.png') no-repeat; background-size: 100px; height:1500px; width: 250px; float: left; margin-top: 500px;"></div>
+		<div id="thirddiv" class="thirddiv" style="background: url('http://demo.bcsg.com/wp-content/themes/bcsg-demo-theme/img/receiptbank-key-feature-5.png') no-repeat; background-size: 250px; height:1500px; width: 400px; float: left; margin-top: 500px;"></div>
+		<div id="fourthdiv" class="fourthdiv" style="height:1500px; width: 250px; float: left; margin-top: 500px;">Hello there</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+
+// Attempting to parallax scroll the background image of the #toolkit module
+
+var giveBgImageDownwardsParallaxEffect = function(classOfElementToParallax, speed) {
+	var parallaxBgImg = $("." + classOfElementToParallax);
+  var parallaxElements = [].slice.call(parallaxBgImg);
+  parallaxElements.forEach(function(element,i){
+    var windowYOffset = window.pageYOffset;
+		var elementYOffset = element.offsetTop + 150;
+		var elementBackgrounPos = "50% " + ((windowYOffset - elementYOffset) * speed) + "px";
+    element.style.backgroundPosition = elementBackgrounPos;
+  });
+};
+
+var whenWeReachThisPoint = function(pointToReach, showOrHide, idOfElementToShowHide) {
+	console.log($(window).scrollTop())
+	if ($(window).scrollTop() === pointToReach && showOrHide === 'show') {
+		$('#' + idOfElementToShowHide).fadeIn();
+	};
+	if ($(window).scrollTop() === pointToReach && showOrHide === 'hide') {
+		$('#' + idOfElementToShowHide).fadeOut();
+	};
+};
+
+
+
+$(window).scroll(function() {
+	whenWeReachThisPoint(0, 'hide', 'fourthdiv');
+	giveBgImageDownwardsParallaxEffect('firstdiv', 1.5);
+	giveBgImageDownwardsParallaxEffect('seconddiv', -1.5);
+	giveBgImageDownwardsParallaxEffect('thirddiv', -0.5);
+	giveBgImageDownwardsParallaxEffect('fourthdiv', -1.0);
+	whenWeReachThisPoint(300, 'show', 'fourthdiv');
+	whenWeReachThisPoint(600, 'hide', 'fourthdiv');
+});
+
+</script>
