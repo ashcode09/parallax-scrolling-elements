@@ -1,10 +1,12 @@
 <html>
-<head></head>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,700,300' rel='stylesheet' type='text/css'>
+</head>
 <body>
-	<div id="firstdiv" class="firstdiv" style="background: url('http://demo.bcsg.com/wp-content/themes/bcsg-demo-theme/img/blue-jagged-bg.jpg'); height:1500px;">
+	<div id="firstdiv" class="firstdiv" style="background: url('http://images8.alphacoders.com/368/368780.jpg'); height:1500px; background-size: cover;">
 		<div id="seconddiv" class="seconddiv" style="background: url('http://demo.bcsg.com/wp-content/themes/bcsg-demo-theme/img/receiptbank-key-feature-5.png') no-repeat; background-size: 100px; height:1500px; width: 250px; float: left; margin-top: 500px;"></div>
 		<div id="thirddiv" class="thirddiv" style="background: url('http://demo.bcsg.com/wp-content/themes/bcsg-demo-theme/img/receiptbank-key-feature-5.png') no-repeat; background-size: 250px; height:1500px; width: 400px; float: left; margin-top: 500px;"></div>
-		<div id="fourthdiv" class="fourthdiv" style="height:1500px; width: 250px; float: left; margin-top: 500px;">Hello there</div>
+		<div id="fourthdiv" class="fourthdiv" style="height:1500px; width: 250px; float: left; margin-top: 500px; color: white; font-family: 'Josefin Sans'; font-size: 60px;">Hello there</div>
 	</div>
 </body>
 </html>
@@ -27,15 +29,20 @@ var giveBgImageDownwardsParallaxEffect = function(classOfElementToParallax, spee
 
 var whenWeReachThisPoint = function(pointToReach, showOrHide, idOfElementToShowHide) {
 	console.log($(window).scrollTop())
-	if ($(window).scrollTop() === pointToReach && showOrHide === 'show') {
-		$('#' + idOfElementToShowHide).fadeIn();
-	};
-	if ($(window).scrollTop() === pointToReach && showOrHide === 'hide') {
-		$('#' + idOfElementToShowHide).fadeOut();
+	if ($(window).scrollTop() === pointToReach) {
+		if (showOrHide === 'show') {
+			$('#' + idOfElementToShowHide).fadeIn();
+		};
+		if (showOrHide === 'hide') {
+			$('#' + idOfElementToShowHide).fadeOut();
+		};
 	};
 };
 
-
+	giveBgImageDownwardsParallaxEffect('firstdiv', 1.5);
+	giveBgImageDownwardsParallaxEffect('seconddiv', -1.5);
+	giveBgImageDownwardsParallaxEffect('thirddiv', -0.5);
+	giveBgImageDownwardsParallaxEffect('fourthdiv', -1.0);
 
 $(window).scroll(function() {
 	whenWeReachThisPoint(0, 'hide', 'fourthdiv');
@@ -43,8 +50,9 @@ $(window).scroll(function() {
 	giveBgImageDownwardsParallaxEffect('seconddiv', -1.5);
 	giveBgImageDownwardsParallaxEffect('thirddiv', -0.5);
 	giveBgImageDownwardsParallaxEffect('fourthdiv', -1.0);
-	whenWeReachThisPoint(300, 'show', 'fourthdiv');
-	whenWeReachThisPoint(600, 'hide', 'fourthdiv');
+	if (0 <= $(window).scrollTop() < 300) {
+		console.log('HERE I AM')
+	}
 });
 
 </script>
